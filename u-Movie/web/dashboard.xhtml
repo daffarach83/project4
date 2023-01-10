@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://bootsfaces.net/ui" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard u-Movie</title>
+	<link rel="icon" type="image/png" href="assets/img/ico.png" />
+    <style>
+body {
+    height: 100%;
+   margin:0;
+   padding:0;
+    background-color: gray;
+}
+.page-holder {
+    min-height: 100vh;
+}
+.bg-cover {
+    background-size: cover !important;
+}
+html {
+    min-height: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+    margin:0;
+    padding:0;
+}
+div.watchtrailer {
+    margin: 0 auto;
+    display: block;
+}
+#myFrame { 
+    width:100%; height:480px; 
+}
+footer.inifooter {
+    position: absolute; 
+    bottom: 0;
+}
+    </style>
+</h:head>
+<h:body>
+    <div style="background: url('assets/bg/bg.jpg')" class="page-holder bg-cover">
+<center>     
+ <b:panel>
+  <f:facet name="heading">
+    <i class="fa user" style="padding-right:20px" />
+    <img src='assets/img/ico.png' width='25' height='25' class='d-inline-block align-bottom' alt='ico'/><h:outputText value="-Movie - DASHBOARD" />
+  </f:facet>
+     <h2 class="mt-3"><img src='assets/img/ico.png' width='35' height='35' class='d-inline-block align-bottom' alt='ico'/>-Movie Admin Menu</h2>
+  <table class="table table-bordered table-striped text-center justify-content-center">
+        <tr>
+            <td>
+                <b:form>
+                   <a id="addmovie" class="btn btn-success btn-md" href="#"  onclick="$('.addmoviemdl').modal()">Add New Movie</a>                     
+		</b:form>
+            </td>
+            <td>
+                <b:form>
+                    <b:commandButton action="#{fdwi.logout()}" value="Logout" look="danger" onclick="return confirm('Hey Do You Want To Logout ?');"></b:commandButton>                         
+		</b:form>
+            </td>
+        </tr>
+    </table>
+</b:panel> 
+
+    <b:messages/>
+ <b:modal id="addmoviemdl" title="ADD NEW MOVIE" styleClass="addmoviemdl">
+  <b:form horizontal="true">
+      
+      <b:inputText placeholder="Title" label="Movie Title:" colMd="9" labelColMd="3" class="mov" value="#{fdo.title}" validatorMessage="PLEASE INPUT THE TITLE">
+    <f:facet name="prepend">
+      <b:iconAwesome name="institution" />
+    </f:facet>
+  <f:validateRequired/> 
+  </b:inputText>
+
+  <b:selectOneMenu label="Movie Genre:" colMd="9" labelColMd="3" value="#{fdo.genre}"  class="mov" required="true" select2="true" style="width: 380px">
+      <f:selectItem itemLabel="(Please select Movie Genre)" itemValue="" />
+      <f:selectItem itemLabel="Action" itemValue="Action" />
+      <f:selectItem itemLabel="Comedy" itemValue="Comedy" />
+      <f:selectItem itemLabel="Drama" itemValue="Drama" />
+      <f:selectItem itemLabel="Fantasy" itemValue="Fantasy" />
+      <f:selectItem itemLabel="Horror" itemValue="Horror" />
+      <f:selectItem itemLabel="Mystery" itemValue="Mystery" />
+      <f:selectItem itemLabel="Romance" itemValue="Romance" />
+      <f:selectItem itemLabel="Thriller" itemValue="Thriller" />
+      <f:selectItem itemLabel="Western" itemValue="Western" />
+      <f:selectItem itemLabel="Others" itemValue="Others" />
+      <f:facet name="prepend">
+      <b:iconAwesome name="plus" />
+      </f:facet>
+      <f:validateRequired/>
+  </b:selectOneMenu>
+      
+      <b:datepicker  rendered="true" label="Release:" colMd="9" labelColMd="3" mode="icon-popup" required="true" requiredMessage="DATE CANT BE NULL" changeMonth="true" changeYear="true" value="#{fdo.rdate}" class="mov" />
+ 
+      <b:selectOneMenu label="Movie Language:" colMd="9" labelColMd="3" value="#{fdo.language}"  class="mov" required="true" select2="true" style="width: 380px">
+      <f:selectItem itemLabel="(Please select Movie Language)" itemValue="" />
+                <f:selectItem itemLabel="English" itemValue="English" />
+                <f:selectItem itemLabel="Russia" itemValue="Russia" />
+                <f:selectItem itemLabel="Korea" itemValue="Korea" />
+                <f:selectItem itemLabel="Japan" itemValue="Japan" />
+                <f:selectItem itemLabel="Hindi" itemValue="Hindi" />
+                <f:selectItem itemLabel="Arab" itemValue="Arab" />
+                <f:selectItem itemLabel="Thailand" itemValue="Thailand" />
+                <f:selectItem itemLabel="Others" itemValue="Others" />
+      <f:facet name="prepend">
+      <b:iconAwesome name="microphone" />
+      </f:facet>
+      <f:validateRequired/>
+  </b:selectOneMenu>
+      
+  <b:inputText placeholder="Movie Casts" label="Casts:" colMd="9" labelColMd="3" class="mov" value="#{fdo.casts}" validatorMessage="PLEASE INPUT THE MOVIE CASTS">
+    <f:facet name="prepend">
+      <b:iconAwesome name="users" />
+    </f:facet>
+  <f:validateRequired/> 
+  </b:inputText>
+      
+  <b:inputText placeholder="Movie Director" label="Director:" colMd="9" labelColMd="3" class="mov" value="#{fdo.director}" validatorMessage="PLEASE INPUT THE MOVIE DIRECTOR">
+    <f:facet name="prepend">
+      <b:iconAwesome name="user" />
+    </f:facet>
+  <f:validateRequired/> 
+  </b:inputText>
+      
+  <b:inputText placeholder="Movie Production House (PH)" label="Movie PH:" colMd="9" labelColMd="3" class="mov" value="#{fdo.production}" validatorMessage="PLEASE INPUT THE MOVIE PRODUCTION HOUSE (PH)">
+    <f:facet name="prepend">
+      <b:iconAwesome name="home" />
+    </f:facet>
+  <f:validateRequired/> 
+  </b:inputText>
+      
+  <b:inputText placeholder="Movie Youtube Trailer Link" label="Trailer Link:" colMd="9" labelColMd="3" class="mov" value="#{fdo.ytlink}" validatorMessage="PLEASE INPUT THE MOVIE TRAILER LINK (YOUTUBE)">
+    <f:facet name="prepend">
+      <b:iconAwesome name="youtube-play" />
+    </f:facet>
+  <f:validateRequired/> 
+  </b:inputText>
+ 
+  <b:panelGrid columns="2" size="sm" >
+  <b:button look="danger" value="Reset" onclick="$('.mov').val('');return false;" iconAwesome="recycle" tooltip-position="right" span="12"/>
+  <b:commandButton action="#{fdo.saveMov()}" tooltip-position="right" span="12"
+    value="Save Movie" class="btn btn-success" ></b:commandButton>
+  </b:panelGrid>
+ </b:form>
+  <f:facet name="footer">    
+    <b:button value="Cancel" dismiss="modal" />
+  </f:facet>
+</b:modal>   
+     
+    
+    <br></br>
+        <b:row>
+     <ui:repeat var="u" value="#{fdo.getAllMov()}">
+  <b:column col-sm="3" col-md="3">
+    <b:thumbnail>
+      <img src="https://img.youtube.com/vi/#{u.ytlink}/0.jpg" alt="Movie #{u.title}" width="480"/>
+      <h6>MOVIE ID: <h:outputText value="uMov-#{u.id}"/></h6>
+     <f:facet name="caption" >
+        <h3><b><h:outputText value="#{u.title}"/></b></h3>
+        <h4><b>Genre: </b><h:outputText value="#{u.genre}"/></h4>
+        <h5><b>Release Date: </b><h:outputText value="#{u.rdate}"/></h5>
+        <h5><b>Language: </b><h:outputText value="#{u.language}"/></h5>
+        <h6><b><h:outputText value="#{u.casts}"/></b></h6>
+        <h6><b><h:outputText value="#{u.director}"/></b></h6>
+        <h6><b><h:outputText value="#{u.production}"/></b></h6>
+        <table class="table table-bordered table-striped text-center justify-content-center">
+            <tr>
+                <td colspan="2">
+                  <a id="bwatch#{u.id}" class="btn btn-primary btn-md" href="#"  onclick="$('.watch#{u.id}').modal()">Watch Trailer</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  <b:form>
+                      <b:commandButton action="#{fdo.getById(u.id)}" value="Edit" look="warning"></b:commandButton>
+                  </b:form>
+                </td>
+                <td>
+                  <b:form>
+                      <b:commandButton action="#{fdo.deleteMov(u.id)}" value="Delete" look="danger" onclick="return confirm('Hey Do You Want To Delete This (#{u.title}) Movie ?');"></b:commandButton>
+                  </b:form>
+                </td>
+            </tr>
+        </table>
+      </f:facet>
+    </b:thumbnail>
+  </b:column>
+<b:modal id="watch#{u.id}" title="#{u.title}" styleClass="watch#{u.id}">
+    <div class="watchtrailer">
+       <iframe id="myFrame" class="watchtrailer" src="https://www.youtube.com/embed/#{u.ytlink}" allow="autoplay" frameborder="0"></iframe>
+    </div>
+</b:modal>
+         </ui:repeat>   
+</b:row>
+</center>
+</div>
+<footer class="page-footer" style="background-color: gray;" >
+  <div class="text-center py-3 bg-gr text-light " style="background-color: gray; color: white;" bottom="0">
+      2022 <span> | </span> <img src='assets/img/ico.png' width='25' height='25' class='d-inline-block align-bottom' alt='ico'/>-Movie<br/>
+  </div>
+</footer>
+</h:body>
+</html>

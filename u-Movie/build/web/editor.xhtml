@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>u-Movie - Editor</title>
+        <link rel="icon" type="image/png" href="assets/img/ico.png" />
+    </h:head>
+    <style>
+body {
+ height: 100%;
+ margin: 0;
+}
+.page-holder {
+    min-height: 100vh;
+}
+.bg-cover {
+    background-size: cover !important;
+}
+    </style>
+    <h:body>
+<center>
+  <b:form horizontal="true">
+      <h:inputHidden
+        class="form-control input-focus"
+        id="id-hidden"
+        value="#{fdo.id}"
+    />
+      <b:container>
+          <b:row style="padding-top: 20px;">
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+                  <img src="https://img.youtube.com/vi/#{fdo.tempimg}/0.jpg" alt="Movie #{u.title}" width="360"/>
+                  <b ><h1 style="margin-bottom: 50px;"><img src='assets/img/ico.png' width='50' height='50' class='d-inline-block align-bottom' alt='ico'/>-Movie Editor</h1></b></b:column>
+                  
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:inputText placeholder="Title" label="Movie Title:" colMd="9" labelColMd="3" class="mov" value="#{fdo.title}" validatorMessage="PLEASE INPUT THE TITLE">
+                <f:facet name="prepend">
+                  <b:iconAwesome name="institution" />
+                </f:facet>
+              <f:validateRequired/> 
+              </b:inputText>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:selectOneMenu label="Movie Genre:" colMd="9" labelColMd="3" value="#{fdo.genre}"  class="mov"  select2="true" style="width: 380px">
+                <f:selectItem itemLabel="(Please select Movie Genre)" itemValue="" />
+                <f:selectItem itemLabel="Action" itemValue="Action" />
+                <f:selectItem itemLabel="Comedy" itemValue="Comedy" />
+                <f:selectItem itemLabel="Drama" itemValue="Drama" />
+                <f:selectItem itemLabel="Fantasy" itemValue="Fantasy" />
+                <f:selectItem itemLabel="Horror" itemValue="Horror" />
+                <f:selectItem itemLabel="Mystery" itemValue="Mystery" />
+                <f:selectItem itemLabel="Romance" itemValue="Romance" />
+                <f:selectItem itemLabel="Thriller" itemValue="Thriller" />
+                <f:selectItem itemLabel="Western" itemValue="Western" />
+                <f:selectItem itemLabel="Others" itemValue="Others" />
+                <f:facet name="prepend">
+                <b:iconAwesome name="plus" />
+                </f:facet>
+                <f:validateRequired/>
+            </b:selectOneMenu>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:datepicker  rendered="true" label="Release:" colMd="9" labelColMd="3" mode="icon-popup"  requiredMessage="DATE CANT BE NULL" changeMonth="true" changeYear="true" value="#{fdo.rdate}" class="mov" />
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:selectOneMenu label="Movie Language:" colMd="9" labelColMd="3" value="#{fdo.language}"  class="mov"  select2="true" style="width: 380px">
+                <f:selectItem itemLabel="(Please select Movie Language)" itemValue="" />
+                <f:selectItem itemLabel="English" itemValue="English" />
+                <f:selectItem itemLabel="Russia" itemValue="Russia" />
+                <f:selectItem itemLabel="Korea" itemValue="Korea" />
+                <f:selectItem itemLabel="Japan" itemValue="Japan" />
+                <f:selectItem itemLabel="Hindi" itemValue="Hindi" />
+                <f:selectItem itemLabel="Arab" itemValue="Arab" />
+                <f:selectItem itemLabel="Thailand" itemValue="Thailand" />
+                <f:selectItem itemLabel="Others" itemValue="Others" />
+                <f:facet name="prepend">
+                <b:iconAwesome name="microphone" />
+                </f:facet>
+                <f:validateRequired/>
+            </b:selectOneMenu>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:inputText placeholder="Movie Casts" label="Casts:" colMd="9" labelColMd="3" class="mov" value="#{fdo.casts}" validatorMessage="PLEASE INPUT THE MOVIE CASTS">
+                <f:facet name="prepend">
+                  <b:iconAwesome name="users" />
+                </f:facet>
+              <f:validateRequired/> 
+              </b:inputText>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:inputText placeholder="Movie Director" label="Director:" colMd="9" labelColMd="3" class="mov" value="#{fdo.director}" validatorMessage="PLEASE INPUT THE MOVIE DIRECTOR">
+                <f:facet name="prepend">
+                  <b:iconAwesome name="user" />
+                </f:facet>
+              <f:validateRequired/> 
+              </b:inputText>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:inputText placeholder="Movie Production House (PH)" label="Movie PH:" colMd="9" labelColMd="3" class="mov" value="#{fdo.production}" validatorMessage="PLEASE INPUT THE MOVIE PRODUCTION HOUSE (PH)">
+                <f:facet name="prepend">
+                  <b:iconAwesome name="home" />
+                </f:facet>
+              <f:validateRequired/> 
+              </b:inputText>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="6">
+              <b:inputText placeholder="Movie Youtube Trailer Link" label="Trailer Link:" colMd="9" labelColMd="3" class="mov" value="#{fdo.ytlink}" validatorMessage="PLEASE INPUT THE MOVIE TRAILER LINK (YOUTUBE)">
+                <f:facet name="prepend">
+                  <b:iconAwesome name="youtube-play" />
+                </f:facet>
+              <f:validateRequired/> 
+              </b:inputText>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+          <b:row>
+              <b:column medium-screen="3"/>
+              <b:column medium-screen="2">
+                  <b:commandButton value="Back" action="#{fdo.goBack()}"   
+                 look="warning" style="width: 150px;"></b:commandButton>  
+              </b:column>
+              <b:column medium-screen="2"/>
+              <b:column medium-screen="2">
+                  <b:commandButton action="#{fdo.editMov()}" tooltip-position="right"
+                    accesskey="" value="EDIT MOVIE" look="success" style="width: 150px;"></b:commandButton>
+              </b:column>
+              <b:column medium-screen="3"/>
+          </b:row>
+      </b:container>
+ </b:form>
+</center>
+    </h:body>
+</html>
+

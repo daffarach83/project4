@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>U-Movie</title>
+    <link rel="icon" type="image/png" href="assets/img/ico.png" />
+    <style>
+body {
+    height: 100%;
+    margin: 0;
+}
+.page-holder {
+    min-height: 100vh;
+}
+.bg-cover {
+    background-size: cover !important;
+}
+html {
+    min-height: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+}
+div.watchtrailer {
+    margin: 0 auto;
+    display: block;
+}
+#myFrame { 
+    width:100%; height:480px; 
+}
+footer.inifooter {
+    position: absolute; 
+    bottom: 0;
+}
+    </style>
+</h:head>
+<h:body>
+<div style="background: url('assets/img/bg1.jpg')" class="page-holder bg-cover">
+    <b:navBar brand="-Movie" brandHref="#" fluid="true" brand-img="assets/img/ico.png" brand-img-style="witdh: 25px; height:25px;"
+position="top" sticky="true">
+   <b:navbarLinks  styleClass="hidden-xs">
+  </b:navbarLinks>
+  <b:navbarLinks pull="right">
+    <b:navLink  value="Login" href="#lgnmodal" onclick="$('.lgnmdl').modal()" style="color: crimson;"></b:navLink>
+  </b:navbarLinks>
+  
+</b:navBar>
+<center>    
+<b:modal id="lgnmodal" title="STAFF LOGIN" styleClass="lgnmdl">
+        <img src="assets/img/logo.png" alt="LOGO" width="100%" style="margin-bottom: 70px;"/>
+    
+  <b:form horizontal="true">
+      <b:inputText placeholder="Staff Username" label="Username:" colMd="10" labelColMd="2" class="cred" value="#{fdwi.username}" validatorMessage="PLEASE INPUT THE USERNAME!!">
+    <f:facet name="prepend">
+      <b:icon name="user" />
+    </f:facet>
+  <f:validateRequired/> 
+  </b:inputText>
+      <b:inputSecret placeholder="Staff Password" label="Password:" colMd="10" labelColMd="2" class="cred" value="#{fdwi.password}" validatorMessage="PLEASE INPUT THE PASSWORD!!" >
+    <f:facet name="prepend">
+      <b:iconAwesome name="key" />
+    </f:facet>
+  <f:validateRequired/> 
+  </b:inputSecret>
+      <div style="margin-bottom: 50px;"></div>
+  <b:panelGrid columns="2" size="sm" >
+  <b:button look="danger" value="Reset" onclick="$('.cred').val('');return false;" iconAwesome="recycle" tooltip-position="right" span="12" style="margin: 10px;"/>
+  <b:commandButton action="#{fdwi.login()}" tooltip-position="right" span="12"
+    value="Login" class="btn btn-success" style="margin: 10px;" ></b:commandButton>
+  </b:panelGrid>
+ </b:form>
+  <f:facet name="footer">    
+    <b:button value="Cancel" dismiss="modal" />
+  </f:facet>
+</b:modal>
+</center>
+<center>
+    <div class="header">
+        <img src="assets/img/logo.png" alt="LOGO" width="250px" style="margin-bottom: 70px; margin-top: 100px;"/>
+    </div>
+
+    <b:messages/>
+<br></br>
+ <b:row>
+     <ui:repeat var="u" value="#{fdo.getAllMov()}">
+  <b:column col-sm="3" col-md="3">
+    <b:thumbnail>
+      <img src="https://img.youtube.com/vi/#{u.ytlink}/0.jpg" alt="Movie #{u.title}" width="480"/>
+      <h6>MOVIE ID: <h:outputText value="uMov-#{u.id}"/></h6>
+      <f:facet name="caption" >
+        <h3><b><h:outputText value="#{u.title}"/></b></h3>
+        <h4><b>Genre: </b><h:outputText value="#{u.genre}"/></h4>
+        <h5><b>Release Date: </b><h:outputText value="#{u.rdate}"/></h5>
+        <h5><b>Language: </b><h:outputText value="#{u.language}"/></h5>
+        <h6><b><h:outputText value="#{u.casts}"/></b></h6>
+        <h6><b><h:outputText value="#{u.director}"/></b></h6>
+        <h6><b><h:outputText value="#{u.production}"/></b></h6>
+                  <a id="bwatch#{u.id}" class="btn btn-primary btn-md" href="#"  onclick="$('.watch#{u.id}').modal()">Watch Trailer</a>
+      </f:facet>
+    </b:thumbnail>
+  </b:column>
+<b:modal id="watch#{u.id}" title="#{u.title}" styleClass="watch#{u.id}">
+    <div class="watchtrailer">
+       <iframe id="myFrame" class="watchtrailer" src="https://www.youtube.com/embed/#{u.ytlink}" allow="autoplay" frameborder="0"></iframe>
+    </div>
+</b:modal>
+         </ui:repeat>   
+</b:row>
+</center>
+</div>
+<footer class="page-footer bg-gr" style="background-color: gray;">
+  <div class="text-center py-3 bg-gr text-light " style="background-color: gray; color: white; " bottom="0">
+      2022 <span> | </span> <img src='assets/img/ico.png' width='25' height='25' class='d-inline-block align-bottom' alt='ico'/>-Movie<br/>
+  </div>
+</footer>
+</h:body>
+</html>

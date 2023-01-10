@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>fdoUtil.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;u-Movie&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">util</a> &gt; <span class="el_source">fdoUtil.java</span></div><h1>fdoUtil.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package util;
+
+import java.util.ArrayList;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.SessionFactory;
+
+/**
+ * Hibernate Utility class with a convenient method to get Session Factory
+ * object.
+ *
+ * @author Farhan
+ */
+<span class="fc" id="L21">public class fdoUtil {</span>
+
+    private static final SessionFactory sessionFactory;
+    
+    static {
+        try {
+            // Create the SessionFactory from standard (hibernate.cfg.xml) 
+            // config file.
+<span class="fc" id="L29">            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();</span>
+<span class="nc" id="L30">        } catch (Throwable ex) {</span>
+            // Log the exception. 
+<span class="nc" id="L32">            System.err.println(&quot;Initial SessionFactory creation failed.&quot; + ex);</span>
+<span class="nc" id="L33">            throw new ExceptionInInitializerError(ex);</span>
+<span class="fc" id="L34">        }</span>
+<span class="fc" id="L35">    }</span>
+    
+    public static SessionFactory getSessionFactory() {
+<span class="fc" id="L38">        return sessionFactory;</span>
+    }
+   
+    
+    	public static HttpSession getSession() {
+<span class="nc" id="L43">		return (HttpSession) FacesContext.getCurrentInstance()</span>
+<span class="nc" id="L44">				.getExternalContext().getSession(false);</span>
+	}
+
+	public static HttpServletRequest getRequest() {
+<span class="nc" id="L48">		return (HttpServletRequest) FacesContext.getCurrentInstance()</span>
+<span class="nc" id="L49">				.getExternalContext().getRequest();</span>
+	}
+
+	public static String getUserName() {
+<span class="nc" id="L53">		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()</span>
+<span class="nc" id="L54">				.getExternalContext().getSession(false);</span>
+<span class="nc" id="L55">		return session.getAttribute(&quot;username&quot;).toString();</span>
+	}
+
+	public static String getUserId() {
+<span class="nc" id="L59">		HttpSession session = getSession();</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">		if (session != null)</span>
+<span class="nc" id="L61">			return (String) session.getAttribute(&quot;userid&quot;);</span>
+		else
+<span class="nc" id="L63">			return null;</span>
+	}
+        
+     public String inputValid( String title, String ytlink, String cast, String director, String production){
+<span class="fc" id="L67">     ArrayList&lt;String&gt; errList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L68">     String alert = &quot;&quot;;</span>
+     
+<span class="pc bpc" id="L70" title="2 of 4 branches missed.">            if (!title.matches(&quot;[^&lt;&gt;{}]+&quot;) || title.isEmpty()){</span>
+<span class="nc" id="L71">            errList.add(&quot; Invalid Title Name &quot;);</span>
+            }
+<span class="pc bpc" id="L73" title="2 of 4 branches missed.">            if (!ytlink.matches(&quot;https:\\/\\/www\\.youtube\\.com\\/watch\\?v\\=(.*?)&quot;) || ytlink.isEmpty()){</span>
+<span class="nc" id="L74">            errList.add(&quot; Invalid Youtube Link (Example: https://www.youtube.com/watch?v=XXXXXXXXXXXXXXX ) &quot;);</span>
+            }
+<span class="pc bpc" id="L76" title="2 of 4 branches missed.">            if (!cast.matches(&quot;[^&lt;&gt;{}]+&quot;) || cast.isEmpty()){</span>
+<span class="nc" id="L77">            errList.add(&quot; Invalid Cast Name &quot;);</span>
+            }
+<span class="pc bpc" id="L79" title="2 of 4 branches missed.">            if (!director.matches(&quot;[^&lt;&gt;{}]+&quot;) || director.isEmpty()){</span>
+<span class="nc" id="L80">            errList.add(&quot; Invalid Director Name &quot;);</span>
+            }
+<span class="pc bpc" id="L82" title="2 of 4 branches missed.">            if (!production.matches(&quot;[^&lt;&gt;{}]+&quot;) || production.isEmpty()){</span>
+<span class="nc" id="L83">            errList.add(&quot; Invalid Production House Name &quot;);</span>
+            }
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">           if (!errList.isEmpty()) {</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                for (String msg : errList) {</span>
+<span class="nc" id="L87">                alert += (&quot; |F|&quot; +msg );</span>
+<span class="nc" id="L88">            }</span>
+           }  
+<span class="fc" id="L90">           return alert;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

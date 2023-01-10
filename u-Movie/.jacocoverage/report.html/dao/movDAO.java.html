@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>movDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;u-Movie&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">movDAO.java</span></div><h1>movDAO.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dao;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojo.Movies;
+import util.fdoUtil;
+
+/**
+ *
+ * @author Farhan
+ */
+<span class="fc" id="L20">public class movDAO {</span>
+    // Untuk menampilkan data ke tabel
+    public List&lt;Movies&gt; rtvMov() {
+<span class="fc" id="L23">        List listMov = new ArrayList();</span>
+<span class="fc" id="L24">        Transaction transaction = null;</span>
+<span class="fc" id="L25">        Session session = fdoUtil.getSessionFactory().openSession();</span>
+        try {
+<span class="fc" id="L27">            transaction = session.beginTransaction();</span>
+<span class="fc" id="L28">            Query query = session.createQuery(&quot;from Movies&quot;);</span>
+<span class="fc" id="L29">            listMov = query.list();</span>
+<span class="fc" id="L30">            transaction.commit();      </span>
+<span class="nc" id="L31">        } catch (Exception e) {</span>
+<span class="nc" id="L32">            System.out.println(e);</span>
+        } finally{
+<span class="pc" id="L34">            session.close();</span>
+<span class="pc" id="L35">        }</span>
+<span class="fc" id="L36">        return listMov;</span>
+    }
+    
+     // untuk mencari/seach data, manipulasi data seperti delete, edit, dan search
+    public List&lt;Movies&gt; getbyID(String idMov) {
+<span class="fc" id="L41">        Movies mov = new Movies();</span>
+<span class="fc" id="L42">        List&lt;Movies&gt; listMov = new ArrayList();</span>
+<span class="fc" id="L43">        Transaction transaction = null;</span>
+<span class="fc" id="L44">        Session session = fdoUtil.getSessionFactory().openSession();</span>
+        
+        try {
+<span class="fc" id="L47">            transaction = session.beginTransaction();</span>
+<span class="fc" id="L48">            Query query = session.createQuery(&quot;from Movies where id = :id&quot;);</span>
+<span class="fc" id="L49">            query.setString(&quot;id&quot;, idMov);</span>
+<span class="fc" id="L50">            mov = (Movies) query.uniqueResult();</span>
+<span class="fc" id="L51">            listMov = query.list();</span>
+<span class="fc" id="L52">            transaction.commit();</span>
+<span class="nc" id="L53">        } catch (Exception e) {</span>
+<span class="nc" id="L54">            System.out.println(e);</span>
+        } finally{
+<span class="pc" id="L56">            session.close();</span>
+<span class="pc" id="L57">        }</span>
+<span class="fc" id="L58">        return listMov;</span>
+    }
+    
+    // untuk add data
+    public void addMovie(Movies mov){
+<span class="fc" id="L63">        Transaction transaction = null;</span>
+<span class="fc" id="L64">        Session session = fdoUtil.getSessionFactory().openSession();</span>
+        try {
+<span class="fc" id="L66">            transaction = session.beginTransaction();</span>
+<span class="fc" id="L67">            session.save(mov);</span>
+<span class="fc" id="L68">            transaction.commit();</span>
+<span class="nc" id="L69">        } catch (Exception e) {</span>
+<span class="nc" id="L70">            System.out.println(e);</span>
+        } finally{
+<span class="pc" id="L72">            session.close();</span>
+<span class="pc" id="L73">        }</span>
+<span class="fc" id="L74">    }</span>
+    
+    // untuk delete berdcasarkan id
+    public void deleteMovie(Integer idMov) {
+<span class="fc" id="L78">        Transaction transaction = null;</span>
+<span class="fc" id="L79">        Session session = fdoUtil.getSessionFactory().openSession();</span>
+        try {
+<span class="fc" id="L81">            transaction = session.beginTransaction();</span>
+<span class="fc" id="L82">            Movies mv = (Movies) session.load(Movies.class, new Integer(idMov));</span>
+<span class="nc" id="L83">            session.delete(mv);</span>
+<span class="nc" id="L84">            transaction.commit();</span>
+<span class="fc" id="L85">        } catch (Exception e) {</span>
+<span class="fc" id="L86">            System.out.println(e);</span>
+        } finally{
+<span class="pc" id="L88">            session.close();</span>
+<span class="pc" id="L89">        }</span>
+<span class="fc" id="L90">    }</span>
+    
+    // untuk edit
+    public void editMovie(Movies movies) {
+<span class="fc" id="L94">        Transaction transaction = null;</span>
+<span class="fc" id="L95">        Session session = fdoUtil.getSessionFactory().openSession();</span>
+        try {
+<span class="fc" id="L97">            transaction = session.beginTransaction();</span>
+<span class="fc" id="L98">            session.update(movies);</span>
+<span class="fc" id="L99">            transaction.commit();</span>
+<span class="fc" id="L100">        } catch (Exception e) {</span>
+<span class="fc" id="L101">            System.out.println(e);</span>
+        } finally{
+<span class="pc" id="L103">            session.close();</span>
+<span class="fc" id="L104">        }</span>
+<span class="fc" id="L105">    }    </span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

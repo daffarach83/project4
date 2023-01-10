@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/web/index.xhtml</file>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/web/editor.xhtml</file>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/src/java/pojo/Movies.hbm.xml</file>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/src/java/dao/movDAO.java</file>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/src/java/dao/staffDAO.java</file>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/src/java/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/web/dashboard.xhtml</file>
+            <file>file:/C:/Users/Hp/OneDrive/Dokumen/NetBeansProjects/u-Movie/test/dao/staffDAOTest.java</file>
+        </group>
+    </open-files>
+</project-private>
